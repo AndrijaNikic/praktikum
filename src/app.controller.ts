@@ -10,7 +10,7 @@ export class AppController {
 
   @Get('/contact')
   getContactPage(): string{
-    return 'Contact details...';
+    return 'Contact details: ';
   }
   @Get('/usage')
   getUsagePage(): string{
