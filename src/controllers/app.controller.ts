@@ -1,6 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { Administrator } from 'entities/administrator.entity';
-import { AdministratorService } from './services/administrator/administrator.service';
+import { AdministratorService } from '../services/administrator/administrator.service';
 
 @Controller()
 export class AppController {
@@ -26,5 +26,10 @@ export class AppController {
   @Get('api/administrator')
   getAllAdmins(): Promise<Administrator[]> {
     return this.administratorService.getAll();
+  }
+
+  @Get('api/administrator/:id')
+  getAdministrator(@Param('id') id: number): Promise<Administrator> {
+    return this.administratorService.getById(id);
   }
 }
