@@ -6,6 +6,7 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  ManyToMany,
 } from "typeorm";
 import { Category } from "./category.entity";
 import { CartArticle } from "./cart-article.entity";
