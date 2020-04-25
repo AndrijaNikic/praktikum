@@ -18,12 +18,24 @@ export class AdministratorService {
         return this.administrator.find();
     }
 
+    async getByUsername(username: string): Promise<Administrator | null>{
+        const admin = await this.administrator.findOne({
+            username: username
+        });
+
+        if(admin){
+            return admin;
+        }
+        
+        return null;
+    }
+
     getById(id: number): Promise<Administrator> {
         return this.administrator.findOne(id);
     }
 
     add(data: AddAdministratorDto): Promise<Administrator | ApiResponse>{
-        const crypto = require('crypto');
+        
         const passwordHash = crypto.createHash('sha512');
         passwordHash.update(data.password);
         const passwordHashString = passwordHash.digest('hex').toUpperCase();
@@ -48,7 +60,7 @@ export class AdministratorService {
             return new Promise(resolve => resolve(new ApiResponse("error", -2001)));
         }
 
-        const crypto = require('crypto');
+        
         const passwordHash = crypto.createHash('sha512');
         passwordHash.update(data.password);
         const passwordHashString = passwordHash.digest('hex').toUpperCase();

@@ -10,11 +10,12 @@ import { CartArticle } from 'entities/cart-article.entity';
 import { Cart } from 'entities/cart.entity';
 import { Order } from 'entities/order.entity';
 import { Photo } from 'entities/photo.entity';
-import { ApiAdministratorController } from './controllers/api.administrator.controller';
+import { ApiAdministratorController } from './controllers/api/api.administrator.controller';
 import { CategoryController } from './controllers/api/category.controller';
 import { CategoryService } from './services/category/category.service';
 import { ArticleService } from './services/article/article.servise';
-import { ArticleController } from './controllers/api.article.controller';
+import { ArticleController } from './controllers/api/api.article.controller';
+import { AuthController } from './controllers/api/auth.controller';
 
 
 @Module({
@@ -40,7 +41,8 @@ import { ArticleController } from './controllers/api.article.controller';
   controllers: [AppController, 
                 ApiAdministratorController,
                 CategoryController,
-                ArticleController],
+                ArticleController,
+                AuthController],
   providers: [AdministratorService,
               CategoryService,
               ArticleService],
