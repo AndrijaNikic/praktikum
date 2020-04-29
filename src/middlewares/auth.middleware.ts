@@ -3,10 +3,13 @@ import { Request, Response, NextFunction } from "express";
 import * as jwt from 'jsonwebtoken';
 import { JwtDataAdministratorDto } from "dtos/jwt.data.administrator.dto";
 import { jwtSecret } from "config/jwt.secret";
+import { AdministratorService } from "src/services/administrator/administrator.service";
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
-    use(req: Request, res: Response, next: NextFunction) {
+    constructor(private administratorService: AdministratorService) { }
+
+    async use(req: Request, res: Response, next: NextFunction) {
         if(!req.headers.authorization){
             throw new HttpException('The token does not exist.', HttpStatus.UNAUTHORIZED);
         }
@@ -23,7 +26,7 @@ export class AuthMiddleware implements NestMiddleware {
             throw new HttpException('The token does not exist.', HttpStatus.UNAUTHORIZED);
         }
 
-        if(jwtData.ip !== req.ip){
+        if(jwtData.ip !== req.ip.toString()){
             throw new HttpException('The token does not exist.', HttpStatus.UNAUTHORIZED);
         }
 
@@ -31,9 +34,14 @@ export class AuthMiddleware implements NestMiddleware {
             throw new HttpException('The token does not exist.', HttpStatus.UNAUTHORIZED);
         }
 
+        const administrator = await this.administratorService.getById(jwtData.administratorId)
+        if(!administrator){
+            throw new HttpException('Account not found', HttpStatus.UNAUTHORIZED);
+        }
+
         const sada = new Date();
         if(jwtData.ext < sada.getTime() / 1000.){
-            throw new HttpException('The token does not exist.', HttpStatus.UNAUTHORIZED);
+            throw new HttpException('The token has expired.', HttpStatus.UNAUTHORIZED);
         }
 
         next();

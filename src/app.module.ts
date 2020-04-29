@@ -47,6 +47,9 @@ import { AuthMiddleware } from './middlewares/auth.middleware';
   providers: [AdministratorService,
               CategoryService,
               ArticleService],
+  exports: [
+      AdministratorService
+  ]
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
