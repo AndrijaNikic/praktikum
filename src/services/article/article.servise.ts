@@ -1,9 +1,9 @@
 import { Injectable } from "@nestjs/common";
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
-import { Category } from "entities/category.entity";
+import { Category } from "src/entities/category.entity";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Article } from "entities/article.entity";
+import { Article } from "src/entities/article.entity";
 import { AddArticleDto } from "dtos/article/add.article.dto";
 import { ApiResponse } from "misc/api.response.class";
 
