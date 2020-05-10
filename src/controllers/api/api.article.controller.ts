@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req } from "@nestjs/common";
+import { Controller, Post, Body, Param, UseInterceptors, UploadedFile, Req, Delete, Patch } from "@nestjs/common";
 import { Crud } from "@nestjsx/crud";
 import { ArticleService } from "src/services/article/article.servise";
 import { Article } from "src/entities/article.entity";
@@ -12,6 +12,7 @@ import { ApiResponse } from "misc/api.response.class";
 import * as fileType from 'file-type';
 import * as fs from 'fs';
 import * as sharp from 'sharp';
+import { EditArticleDto } from "dtos/article/edit.article.dto";
 
 @Controller('api/article')
 @Crud({
@@ -26,7 +27,14 @@ import * as sharp from 'sharp';
         category: { eager: true },
         photos: { eager: true}
     }
-}
+},
+    routes: {
+        exclude: [ 
+            'updateOneBase',
+            'replaceOneBase',
+            'deleteOneBase'
+        ]
+    }
 
 })
 
@@ -157,4 +165,37 @@ export class ArticleController {
         })
         .toFile(destinationFilePath);
     }
+
+    @Delete(':articleId/deletePhoto/:photoId')
+    async deletePhoto(@Param('articleId') articleId: number, @Param('photoId') photoId: number) {
+        const photo = await this.photoService.findOne({
+            photoId: photoId,
+            articleId: articleId
+        });
+
+        if(!photo) {
+            return new ApiResponse('error', -4004, 'Photo not found.');
+        }
+
+        try{
+        fs.unlinkSync(StorageConfig.photo.destination + photo.imagePath);
+        fs.unlinkSync(StorageConfig.photo.destination + StorageConfig.photo.resize.thumb.directory + photo.imagePath);
+        fs.unlinkSync(StorageConfig.photo.destination + StorageConfig.photo.resize.small.directory + photo.imagePath);
+        } catch (e) { } 
+
+        const deleteResult = await this.photoService.deleteById(photoId);
+        if(!deleteResult.affected) {
+            return new ApiResponse('error', -4004, 'Photo not found.');
+        }
+
+        return new ApiResponse('ok', 0, 'One photo has been deleted.');
+
+    }
+
+    @Patch(':id')
+    async editById(@Param('id') id: number, @Body() data: EditArticleDto) {
+        return await this.service.editById(id, data);
+
+    }
+
 }

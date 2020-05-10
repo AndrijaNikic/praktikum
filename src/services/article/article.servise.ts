@@ -6,6 +6,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Article } from "src/entities/article.entity";
 import { AddArticleDto } from "dtos/article/add.article.dto";
 import { ApiResponse } from "misc/api.response.class";
+import { EditArticleDto } from "dtos/article/edit.article.dto";
 
 @Injectable()
 export class ArticleService extends TypeOrmCrudService<Article> {
@@ -29,6 +30,29 @@ export class ArticleService extends TypeOrmCrudService<Article> {
             relations: [
                 "category"
             ]
+        });
+    }
+
+    async editById(id:number, data: EditArticleDto) {
+        const existingArticle: Article = await this.article.findOne(id);
+        if(!existingArticle) {
+            return new ApiResponse('error', -5001, 'Article not found.');
+        }
+
+        existingArticle.name = data.name;
+        existingArticle.categoryId = data.categoryId;
+        existingArticle.description = data.description;
+        existingArticle.imagePath = data.imagePath;
+        existingArticle.ingredients = data.ingredients;
+        existingArticle.price = data.price;
+
+        const savedArticle: Article = await this.article.save(existingArticle);
+        if(!savedArticle) {
+            return new ApiResponse('error', -5002, 'Could not save new article.');
+        }
+
+        return await this.article.findOne(id, {
+            relations: ['category', 'photos']
         });
     }
 }
