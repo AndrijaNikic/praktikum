@@ -8,7 +8,7 @@ async function bootstrap() {
 
 app.useStaticAssets(StorageConfig.photo.destination, {
   prefix: StorageConfig.photo.urlPrefix,
-  maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+  maxAge: StorageConfig.photo.maxAge, // 7 days
   index: false
 });
 
