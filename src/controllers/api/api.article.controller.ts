@@ -43,7 +43,7 @@ export class ArticleController {
         public service: ArticleService,
         public photoService: PhotoService) { }
     
-    @Post('createFull')
+    @Post()
     createFullArticle(@Body() data: AddArticleDto){
         return this.service.createFullArticle(data);
     }

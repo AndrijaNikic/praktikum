@@ -1,4 +1,4 @@
-export class JwtDataAdministratorDto{
+export class JwtDataDto{
     administratorId: number;
     username: string;
     exp: number;

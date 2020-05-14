@@ -5,7 +5,7 @@ import { ApiResponse } from "misc/api.response.class";
 import * as crypto from 'crypto';
 import { LoginInfoAdministratorDto } from "dtos/login.info.administrator.dto";
 import * as jwt from 'jsonwebtoken';
-import { JwtDataAdministratorDto } from "dtos/jwt.data.administrator.dto";
+import { JwtDataDto } from "dtos/auth/jwt.data.dto";
 import { Request } from "express";
 import { jwtSecret } from "config/jwt.secret";
 // import { UserRegistrationDto } from "dtos/user/user.registration.dto";
@@ -16,7 +16,7 @@ export class AuthController{
         //  public userService: UserService
          ) { }
 
-    @Post('login')
+    @Post('administrator/login')
     async doLogin(@Body() data: LoginAdministratorDto, @Req() req: Request): Promise<LoginInfoAdministratorDto | ApiResponse> {
         const administrator = await this.administratorService.getByUsername(data.username);
 
@@ -32,7 +32,7 @@ export class AuthController{
             return new Promise(resolve => resolve(new ApiResponse('error', -3002)));
         }
 
-        const jwtData = new JwtDataAdministratorDto();
+        const jwtData = new JwtDataDto();
         jwtData.administratorId = administrator.administratorId;
         jwtData.username = administrator.username;
         

@@ -1,7 +1,7 @@
 import { NestMiddleware, Injectable, HttpException, HttpStatus } from "@nestjs/common";
 import { Request, Response, NextFunction } from "express";
 import * as jwt from 'jsonwebtoken';
-import { JwtDataAdministratorDto } from "dtos/jwt.data.administrator.dto";
+import { JwtDataDto } from "dtos/auth/jwt.data.dto";
 import { jwtSecret } from "config/jwt.secret";
 import { AdministratorService } from "src/services/administrator/administrator.service";
 
@@ -21,7 +21,7 @@ export class AuthMiddleware implements NestMiddleware {
 
         const token = tokenParts[1];
 
-        let jwtData: JwtDataAdministratorDto;
+        let jwtData: JwtDataDto;
         
         try {
         jwtData = jwt.verify(token, jwtSecret);
