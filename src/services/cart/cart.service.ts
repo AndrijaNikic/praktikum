@@ -76,14 +76,14 @@ export class CartService {
                 "cartArticles",
                 "cartArticles.article",
                 "cartArticles.article.category",
-                "cartArticles.article.articlePrices",
-                "cartArticles.article.photos"
+                // "cartArticles.article.articlePrices",
+                // "cartArticles.article.photos"
             ]
         });
     }
 
-    async ChangeQuantity(cartId: number, articleId: number, newQuantity: number){
-        let record = await this.cartArticle.findOne({
+    async changeQuantity(cartId: number, articleId: number, newQuantity: number): Promise<Cart>{
+        let record: CartArticle = await this.cartArticle.findOne({
             cartId: cartId,
             articleId: articleId
         });
@@ -98,5 +98,7 @@ export class CartService {
             await this.cartArticle.save(record);
         }
      }
+
+     return await this.getById(cartId);
     }
 }

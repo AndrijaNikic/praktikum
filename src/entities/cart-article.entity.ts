@@ -29,10 +29,10 @@ export class CartArticle {
   articleId: number;
 
   @Column({
-    type:"decimal",
+    type:"int",
     unsigned: true,
-    precision: 10,
-    scale: 2,
+    // precision: 10,
+    // scale: 2,
   })
   quantity: number;
 
