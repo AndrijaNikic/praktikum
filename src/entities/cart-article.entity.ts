@@ -34,7 +34,7 @@ export class CartArticle {
     precision: 10,
     scale: 2,
   })
-  quantity: string;
+  quantity: number;
 
   @ManyToOne(() => Article, (article) => article.cartArticles, {
     onDelete: "RESTRICT",

@@ -18,6 +18,8 @@ import { ArticleController } from './controllers/api/api.article.controller';
 import { AuthController } from './controllers/api/auth.controller';
 import { AuthMiddleware } from './middlewares/auth.middleware';
 import { PhotoService } from './services/photo/photo.service';
+import { CartService } from './services/cart/cart.service';
+import { ApiCartController } from './controllers/api/api.cart.controller';
 
 
 @Module({
@@ -44,11 +46,13 @@ import { PhotoService } from './services/photo/photo.service';
                 ApiAdministratorController,
                 CategoryController,
                 ArticleController,
-                AuthController],
+                AuthController,
+                ApiCartController],
   providers: [AdministratorService,
               CategoryService,
               ArticleService,
-              PhotoService],
+              PhotoService,
+              CartService],
   exports: [
       AdministratorService
   ]
