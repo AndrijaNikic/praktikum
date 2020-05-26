@@ -20,6 +20,7 @@ import { AuthMiddleware } from './middlewares/auth.middleware';
 import { PhotoService } from './services/photo/photo.service';
 import { CartService } from './services/cart/cart.service';
 import { ApiCartController } from './controllers/api/api.cart.controller';
+import { OrderService } from './services/order/order.service';
 
 
 @Module({
@@ -52,7 +53,8 @@ import { ApiCartController } from './controllers/api/api.cart.controller';
               CategoryService,
               ArticleService,
               PhotoService,
-              CartService],
+              CartService,
+              OrderService],
   exports: [
       AdministratorService
   ]

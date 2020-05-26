@@ -11,8 +11,9 @@ import { Order } from "src/entities/order.entity";
 export class CartService {
     constructor(@InjectRepository(Cart) private cart: Repository<Cart>,
                 @InjectRepository(CartArticle) private cartArticle: Repository<CartArticle>,
-                @InjectRepository(Article) private article: Repository<Article>,
-                @InjectRepository(Order) private order: Repository<Order>) { }
+                // @InjectRepository(Article) private article: Repository<Article>,
+                // @InjectRepository(Order) private order: Repository<Order>
+                ) { }
 
 
     async getLastCartByOrderId(orderId: number): Promise<Cart | null> {

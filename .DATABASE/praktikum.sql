@@ -54,10 +54,13 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `note` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`cart_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 DELETE FROM `cart`;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+INSERT INTO `cart` (`cart_id`, `created_at`, `note`) VALUES
+	(1, '2020-05-19 12:20:32', NULL),
+	(2, '2020-05-19 12:33:18', NULL);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `cart_article`;
@@ -65,16 +68,18 @@ CREATE TABLE IF NOT EXISTS `cart_article` (
   `cart_article_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `cart_id` int(11) unsigned NOT NULL DEFAULT '0',
   `article_id` int(11) unsigned NOT NULL DEFAULT '0',
-  `quantity` decimal(10,2) unsigned NOT NULL DEFAULT '0.00',
+  `quantity` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`cart_article_id`),
   UNIQUE KEY `uq_cart_article_cart_id_article_id` (`cart_id`,`article_id`),
   KEY `fk_cart_article_article_id` (`article_id`),
   CONSTRAINT `fk_cart_article_article_id` FOREIGN KEY (`article_id`) REFERENCES `article` (`article_id`) ON UPDATE CASCADE,
   CONSTRAINT `fk_cart_article_cart_id` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 DELETE FROM `cart_article`;
 /*!40000 ALTER TABLE `cart_article` DISABLE KEYS */;
+INSERT INTO `cart_article` (`cart_article_id`, `cart_id`, `article_id`, `quantity`) VALUES
+	(1, 1, 1, 5);
 /*!40000 ALTER TABLE `cart_article` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `category`;
@@ -104,10 +109,12 @@ CREATE TABLE IF NOT EXISTS `order` (
   PRIMARY KEY (`order_id`),
   UNIQUE KEY `uq_order_cart_id` (`cart_id`),
   CONSTRAINT `fk_order_cart_id` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 DELETE FROM `order`;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
+INSERT INTO `order` (`order_id`, `created_at`, `cart_id`, `status`) VALUES
+	(1, '2020-05-19 12:32:52', 1, 'shipped');
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `photo`;
