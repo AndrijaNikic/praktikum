@@ -11,7 +11,7 @@ import { Order } from "src/entities/order.entity";
 export class CartService {
     constructor(@InjectRepository(Cart) private cart: Repository<Cart>,
                 @InjectRepository(CartArticle) private cartArticle: Repository<CartArticle>,
-                // @InjectRepository(Article) private article: Repository<Article>,
+                @InjectRepository(Article) private article: Repository<Article>,
                 // @InjectRepository(Order) private order: Repository<Order>
                 ) { }
 
@@ -51,6 +51,11 @@ export class CartService {
             cartId: cartId,
             articleId: articleId
         });
+
+        const article = await this.article.findOne(articleId);
+        if(!article) {
+            return new ApiResponse("error", -6002, "There is no such article.");
+        }
 
         if(!record) {
             record = new CartArticle();

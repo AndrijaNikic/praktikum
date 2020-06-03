@@ -11,6 +11,7 @@ import {
 import { Category } from "./category.entity";
 import { CartArticle } from "./cart-article.entity";
 import { Photo } from "./photo.entity";
+import * as Validator from 'class-validator';
 
 // @Index("uq_article_image_path", ["imagePath"], { unique: true })
 // @Index("fk_article_category_id", ["categoryId"], {})
@@ -20,12 +21,19 @@ export class Article {
   articleId: number;
 
   @Column({type:"varchar", length: 128})
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(2, 128)
   name: string;
 
   @Column({type: "int", name: "category_id", unsigned: true})
+
   categoryId: number;
 
   @Column({type: "text"})
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(64, 1000)
   description: string;
 
   @Column({
@@ -34,12 +42,25 @@ export class Article {
     unique: true,
     length: 128
   })
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(2, 128)
   imagePath: string;
 
   @Column({type:"varchar", length: 128})
+  @Validator.IsNotEmpty()
+  @Validator.IsString()
+  @Validator.Length(64, 1000)
   ingredients: string;
 
   @Column({type: "int"})
+  @Validator.IsNotEmpty()
+  @Validator.IsPositive()
+  @Validator.IsNumber({
+    allowInfinity: false,
+    allowNaN: false,
+    maxDecimalPlaces: 2
+  })
   price: number;
 
   @ManyToOne(() => Category, (category) => category.articles, {

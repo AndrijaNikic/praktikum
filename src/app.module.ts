@@ -21,7 +21,9 @@ import { PhotoService } from './services/photo/photo.service';
 import { CartService } from './services/cart/cart.service';
 import { ApiCartController } from './controllers/api/api.cart.controller';
 import { OrderService } from './services/order/order.service';
-
+import { MailerModule } from '@nestjs-modules/mailer';
+import { MailConfigugarion } from 'config/mail.configuration';
+import { OrderMailerService } from './services/order/order.mailer.service';
 
 @Module({
   imports: [
@@ -41,7 +43,13 @@ import { OrderService } from './services/order/order.service';
                   Photo 
                 ]
     }),
-    TypeOrmModule.forFeature([ Administrator, Category, Article, Photo, Order, Cart, CartArticle ])
+    TypeOrmModule.forFeature([ Administrator, Category, Article, Photo, Order, Cart, CartArticle ]),
+    MailerModule.forRoot({
+      transport: `smtps://${MailConfigugarion.hostname}:${MailConfigugarion.password}@${MailConfigugarion.hostname}`,
+      defaults: {
+        from: MailConfigugarion.senderEmail
+      }
+    })
   ],
   controllers: [AppController, 
                 ApiAdministratorController,
@@ -54,7 +62,8 @@ import { OrderService } from './services/order/order.service';
               ArticleService,
               PhotoService,
               CartService,
-              OrderService],
+              OrderService,
+              OrderMailerService],
   exports: [
       AdministratorService
   ]
