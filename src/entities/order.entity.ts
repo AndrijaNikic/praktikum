@@ -7,7 +7,6 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Cart } from "./cart.entity";
-// import { Validator } from "class-validator";
 import * as Validator from 'class-validator';
 
 // @Index("uq_order_cart_id", ["cartId"], { unique: true })

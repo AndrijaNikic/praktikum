@@ -45,7 +45,7 @@ import { OrderMailerService } from './services/order/order.mailer.service';
     }),
     TypeOrmModule.forFeature([ Administrator, Category, Article, Photo, Order, Cart, CartArticle ]),
     MailerModule.forRoot({
-      transport: `smtps://${MailConfigugarion.hostname}:${MailConfigugarion.password}@${MailConfigugarion.hostname}`,
+      transport: `smtps://${MailConfigugarion.username}:${MailConfigugarion.password}@${MailConfigugarion.hostname}`,
       defaults: {
         from: MailConfigugarion.senderEmail
       }

@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { MailerService } from "@nestjs-modules/mailer";
 import { Order } from "src/entities/order.entity";
 import { MailConfigugarion } from "config/mail.configuration";
+import { CartArticle } from "src/entities/cart-article.entity";
 
 @Injectable()
 export class OrderMailerService {
@@ -17,10 +18,12 @@ export class OrderMailerService {
         });
     }
 
-    createOrderHtml(Order: Order): string {
-        let suma = 0;
+    createOrderHtml(order: Order): string {
+        let suma = order.cart.cartArticles.reduce((sum, current: CartArticle) => {
+            return sum = current.quantity * current.article.price
+        }, 0);
 
-        for(let cartArticle of Order.cart.cartArticles) {
+        for(let cartArticle of order.cart.cartArticles) {
             const price = cartArticle.article.price;
             suma += price;
         }
@@ -29,10 +32,10 @@ export class OrderMailerService {
                 <p>Hvala za Vasu porudzbinu.</p>
                 <p>Ovo su stavke Vase porudzbine:</p>
                 <ul>
-                    ${Order.cart.cartArticles.map(cA => {
-                        return `<li>${ cA.article.name} x ${cA.quantity}</li>`
-                    })}
-                <ul>
+                    ${order.cart.cartArticles.map((cA: CartArticle) => {
+                        return `<li>${ cA.article.name} x ${cA.quantity}</li>`;
+                    }).join("")}
+                </ul>
                 <p>Ukupno za uplatu: ${suma.toFixed(2) } EUR</p>`;
     }
 }
