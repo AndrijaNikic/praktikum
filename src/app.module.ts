@@ -25,6 +25,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { MailConfigugarion } from 'config/mail.configuration';
 import { OrderMailerService } from './services/order/order.mailer.service';
 import { AdministratorOrderController } from './controllers/api/administrator.order.controller';
+import { AdministratorToken } from './entities/administrator-token.entity';
 
 @Module({
   imports: [
@@ -41,10 +42,11 @@ import { AdministratorOrderController } from './controllers/api/administrator.or
                   CartArticle,
                   Cart,
                   Order,
-                  Photo 
+                  Photo,
+                  AdministratorToken 
                 ]
     }),
-    TypeOrmModule.forFeature([ Administrator, Category, Article, Photo, Order, Cart, CartArticle ]),
+    TypeOrmModule.forFeature([ Administrator, Category, Article, Photo, Order, Cart, CartArticle, AdministratorToken ]),
     MailerModule.forRoot({
       transport: `smtps://${MailConfigugarion.username}:${MailConfigugarion.password}@${MailConfigugarion.hostname}`,
       defaults: {

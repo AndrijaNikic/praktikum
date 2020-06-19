@@ -11,7 +11,7 @@ import * as Validator from 'class-validator';
 
 // @Index("uq_photo_image_path", ["imagePath"], { unique: true })
 // @Index("fk_photo_article_id", ["articleId"], {})
-@Entity()
+@Entity("photo")
 export class Photo {
   @PrimaryGeneratedColumn({ type: "int", name: "photo_id", unsigned: true })
   photoId: number;

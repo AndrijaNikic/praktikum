@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 import * as Validator from 'class-validator';
 
-@Entity()
+@Entity("administrator")
 export class Administrator {
     @PrimaryGeneratedColumn({ name: 'administrator_id', type: 'int', unsigned: true })
     administratorId: number;

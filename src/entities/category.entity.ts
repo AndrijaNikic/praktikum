@@ -10,7 +10,7 @@ import * as Validator from 'class-validator';
 
 // @Index("uq_category_name", ["name"], { unique: true })
 // @Index("uq_category_image_path", ["imagePath"], { unique: true })
-@Entity()
+@Entity("category")
 export class Category {
   @PrimaryGeneratedColumn({ type: "int", name: "category_id", unsigned: true })
   categoryId: number;
