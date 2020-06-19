@@ -4,11 +4,9 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-DROP DATABASE IF EXISTS `praktikum`;
 CREATE DATABASE IF NOT EXISTS `praktikum` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
 USE `praktikum`;
 
-DROP TABLE IF EXISTS `administrator`;
 CREATE TABLE IF NOT EXISTS `administrator` (
   `administrator_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(32) NOT NULL DEFAULT '0',
@@ -25,7 +23,24 @@ INSERT INTO `administrator` (`administrator_id`, `username`, `password_hash`) VA
 	(3, 'novi', '260FDFA9DD036152068CCEA792FEB6A8CF1982F5B0573B9282A5C82C91F2D9BE355A0E2160E149E96EC773122A0385E6662E07F632A1B7F7BE1220F8BF27A60E');
 /*!40000 ALTER TABLE `administrator` ENABLE KEYS */;
 
-DROP TABLE IF EXISTS `article`;
+CREATE TABLE IF NOT EXISTS `administrator_token` (
+  `administrator_token_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `administrator_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `token` text NOT NULL,
+  `expires_at` datetime NOT NULL,
+  `is_valid` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`administrator_token_id`),
+  KEY `fk_administrator_token_administrator_id` (`administrator_id`),
+  CONSTRAINT `fk_administrator_token_administrator_id` FOREIGN KEY (`administrator_id`) REFERENCES `administrator` (`administrator_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+DELETE FROM `administrator_token`;
+/*!40000 ALTER TABLE `administrator_token` DISABLE KEYS */;
+INSERT INTO `administrator_token` (`administrator_token_id`, `administrator_id`, `created_at`, `token`, `expires_at`, `is_valid`) VALUES
+	(1, 3, '2020-06-19 02:00:11', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTIwMzIxMS42OTksImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI1LjAiLCJpYXQiOjE1OTI1MjQ4MTF9.qUmAlkvT0krk7tQ0zn_jC7YUhe3SxPfE64iYfbGWCyc', '2020-07-20 00:00:11', 1);
+/*!40000 ALTER TABLE `administrator_token` ENABLE KEYS */;
+
 CREATE TABLE IF NOT EXISTS `article` (
   `article_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL DEFAULT '0',
@@ -48,22 +63,29 @@ INSERT INTO `article` (`article_id`, `name`, `category_id`, `description`, `imag
 	(3, 'Vocni mafin', 3, 'Opis vocnog mafina', 'assets/img/vocnimuffin', 'Sastojci', 50);
 /*!40000 ALTER TABLE `article` ENABLE KEYS */;
 
-DROP TABLE IF EXISTS `cart`;
 CREATE TABLE IF NOT EXISTS `cart` (
   `cart_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `note` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`cart_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 DELETE FROM `cart`;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
 INSERT INTO `cart` (`cart_id`, `created_at`, `note`) VALUES
 	(1, '2020-05-19 12:20:32', NULL),
-	(2, '2020-05-19 12:33:18', NULL);
+	(2, '2020-05-19 12:33:18', NULL),
+	(3, '2020-05-26 13:38:09', NULL),
+	(4, '2020-05-26 13:39:48', NULL),
+	(5, '2020-05-26 13:40:05', NULL),
+	(6, '2020-05-26 13:40:27', NULL),
+	(7, '2020-05-26 13:42:12', NULL),
+	(8, '2020-05-26 13:42:45', NULL),
+	(9, '2020-05-26 13:44:38', NULL),
+	(10, '2020-05-26 13:48:47', NULL),
+	(11, '2020-05-26 13:49:44', NULL);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 
-DROP TABLE IF EXISTS `cart_article`;
 CREATE TABLE IF NOT EXISTS `cart_article` (
   `cart_article_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `cart_id` int(11) unsigned NOT NULL DEFAULT '0',
@@ -79,10 +101,10 @@ CREATE TABLE IF NOT EXISTS `cart_article` (
 DELETE FROM `cart_article`;
 /*!40000 ALTER TABLE `cart_article` DISABLE KEYS */;
 INSERT INTO `cart_article` (`cart_article_id`, `cart_id`, `article_id`, `quantity`) VALUES
-	(1, 1, 1, 5);
+	(1, 1, 1, 5),
+	(2, 11, 2, 2);
 /*!40000 ALTER TABLE `cart_article` ENABLE KEYS */;
 
-DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
   `category_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL DEFAULT '0',
@@ -100,7 +122,6 @@ INSERT INTO `category` (`category_id`, `name`, `image_path`) VALUES
 	(3, 'Mafini', 'assets/img/muffin1.jpg');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 
-DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
   `order_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -109,15 +130,24 @@ CREATE TABLE IF NOT EXISTS `order` (
   PRIMARY KEY (`order_id`),
   UNIQUE KEY `uq_order_cart_id` (`cart_id`),
   CONSTRAINT `fk_order_cart_id` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 DELETE FROM `order`;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
 INSERT INTO `order` (`order_id`, `created_at`, `cart_id`, `status`) VALUES
-	(1, '2020-05-19 12:32:52', 1, 'shipped');
+	(1, '2020-05-19 12:32:52', 1, 'shipped'),
+	(2, '2020-06-18 14:44:09', 2, 'shipped'),
+	(3, '2020-05-26 13:38:09', 3, 'pending'),
+	(4, '2020-05-26 13:39:48', 4, 'pending'),
+	(5, '2020-05-26 13:40:05', 5, 'pending'),
+	(6, '2020-05-26 13:40:27', 6, 'pending'),
+	(7, '2020-05-26 13:42:12', 7, 'pending'),
+	(8, '2020-05-26 13:42:45', 8, 'pending'),
+	(9, '2020-05-26 13:44:38', 9, 'pending'),
+	(10, '2020-05-26 13:48:47', 10, 'pending'),
+	(11, '2020-05-26 13:50:57', 11, 'pending');
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 
-DROP TABLE IF EXISTS `photo`;
 CREATE TABLE IF NOT EXISTS `photo` (
   `photo_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `article_id` int(11) unsigned NOT NULL DEFAULT '0',
