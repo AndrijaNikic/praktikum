@@ -13,6 +13,7 @@ import * as fileType from 'file-type';
 import * as fs from 'fs';
 import * as sharp from 'sharp';
 import { EditArticleDto } from "dtos/article/edit.article.dto";
+import { ArticleFilterDto } from "dtos/article/article.filter.dto";
 
 @Controller('api/article')
 @Crud({
@@ -196,6 +197,11 @@ export class ArticleController {
     async editById(@Param('id') id: number, @Body() data: EditArticleDto) {
         return await this.service.editById(id, data);
 
+    }
+
+    @Post('filter')
+    async filter(@Body() data: ArticleFilterDto): Promise<Article[]> {
+        return await this.service.filter(data);
     }
 
 }

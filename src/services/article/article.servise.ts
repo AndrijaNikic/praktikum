@@ -1,12 +1,13 @@
 import { Injectable } from "@nestjs/common";
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
 import { Category } from "src/entities/category.entity";
-import { Repository } from "typeorm";
+import { Repository, In } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Article } from "src/entities/article.entity";
 import { AddArticleDto } from "dtos/article/add.article.dto";
 import { ApiResponse } from "misc/api.response.class";
 import { EditArticleDto } from "dtos/article/edit.article.dto";
+import { ArticleFilterDto } from "dtos/article/article.filter.dto";
 
 @Injectable()
 export class ArticleService extends TypeOrmCrudService<Article> {
@@ -28,7 +29,8 @@ export class ArticleService extends TypeOrmCrudService<Article> {
 
         return await this.article.findOne(savedArticle.articleId, {
             relations: [
-                "category"
+                "category",
+                "photos"
             ]
         });
     }
@@ -54,5 +56,51 @@ export class ArticleService extends TypeOrmCrudService<Article> {
         return await this.article.findOne(id, {
             relations: ['category', 'photos']
         });
+    }
+
+    async filter(data: ArticleFilterDto): Promise<Article[]> {
+        const builder = await this.article.createQueryBuilder("article");
+
+        // builder.innerJoin("article.price", "ap");
+
+        builder.where('article.categoryId = :catId', { catId: data.categoryId });
+
+        let orderBy = 'article.price';
+        let orderDirection: 'ASC' | 'DESC' = 'ASC';
+
+        if (data.orderBy) {
+            orderBy = data.orderBy;
+        }
+
+        if (data.orderDirection) {
+            orderDirection = data.orderDirection;
+        }
+
+        builder.orderBy(orderBy, orderDirection); 
+
+        let page = 0;
+        let perPage: 5 | 10 | 25 | 50 | 75 = 25;
+
+        if (data.page && typeof data.page === 'number') {
+            page = data.page;
+        }
+
+        if (data.itemsPerPage && typeof data.itemsPerPage === 'number') {
+            perPage = data.itemsPerPage;
+        }
+
+        builder.skip(page * perPage);
+        builder.take(perPage);
+
+        let articleIds = await (await builder.getMany()).map(article => article.articleId);
+
+        return await this.article.find({
+            where: { articleId: In(articleIds) },
+            relations: [
+                "category",
+                "photos"
+            ]
+        });
+
     }
 }
