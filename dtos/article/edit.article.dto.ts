@@ -6,6 +6,8 @@ export class EditArticleDto {
     @Validator.Length(5, 128)
     name: string;
 
+    @Validator.IsNotEmpty()
+    @Validator.IsNumber()
     categoryId: number;
 
     @Validator.IsNotEmpty()

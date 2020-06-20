@@ -153,7 +153,7 @@ export class ArticleController {
         const originalFilePath = photo.path;
         const fileName = photo.filename;
 
-        const destinationFilePath = StorageConfig.photo.destination +
+        const destinationFilePath = StorageConfig.photo.destination + "/" +
          resizeSettings.directory + fileName;
 
         await sharp(originalFilePath).resize({

@@ -33,12 +33,15 @@ CREATE TABLE IF NOT EXISTS `administrator_token` (
   PRIMARY KEY (`administrator_token_id`),
   KEY `fk_administrator_token_administrator_id` (`administrator_id`),
   CONSTRAINT `fk_administrator_token_administrator_id` FOREIGN KEY (`administrator_id`) REFERENCES `administrator` (`administrator_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 DELETE FROM `administrator_token`;
 /*!40000 ALTER TABLE `administrator_token` DISABLE KEYS */;
 INSERT INTO `administrator_token` (`administrator_token_id`, `administrator_id`, `created_at`, `token`, `expires_at`, `is_valid`) VALUES
-	(1, 3, '2020-06-19 02:00:11', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTIwMzIxMS42OTksImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI1LjAiLCJpYXQiOjE1OTI1MjQ4MTF9.qUmAlkvT0krk7tQ0zn_jC7YUhe3SxPfE64iYfbGWCyc', '2020-07-20 00:00:11', 1);
+	(1, 3, '2020-06-19 02:00:11', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTIwMzIxMS42OTksImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI1LjAiLCJpYXQiOjE1OTI1MjQ4MTF9.qUmAlkvT0krk7tQ0zn_jC7YUhe3SxPfE64iYfbGWCyc', '2020-07-20 00:00:11', 1),
+	(2, 3, '2020-06-19 13:19:51', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTI0Mzk5MS44NzQsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI1LjAiLCJpYXQiOjE1OTI1NjU1OTF9.aJHrgw_Q3YQUP16IIBoIzLQG7VR92N5mnKT3ehM8krs', '2020-07-20 11:19:51', 1),
+	(3, 3, '2020-06-19 13:21:41', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTI0NDEwMS4xMDMsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI1LjAiLCJpYXQiOjE1OTI1NjU3MDF9.d_h94-FSwPuvPKkCpNn9V16tkPUJCC0iNtP7juXo3aM', '2020-07-20 11:21:41', 1),
+	(4, 3, '2020-06-20 22:34:15', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTM2MzY1NS41MzYsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI1LjAiLCJpYXQiOjE1OTI2ODUyNTV9.6rrs1ertWzyJBvWk-o3WsBRo3qWcRzW3Tdd9hMZXmX8', '2020-07-21 20:34:15', 1);
 /*!40000 ALTER TABLE `administrator_token` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `article` (
@@ -60,7 +63,7 @@ DELETE FROM `article`;
 INSERT INTO `article` (`article_id`, `name`, `category_id`, `description`, `image_path`, `ingredients`, `price`) VALUES
 	(1, 'Oreo torta', 1, 'Opis oreo torte', 'assets/img/oreocake1.jpg', 'Sastojci', 500),
 	(2, 'Cokoladni mafin', 3, 'Opis cokoladnog mafina', 'assets/img/chocmuffin', 'Sastojci', 50),
-	(3, 'Vocni mafin', 3, 'Opis vocnog mafina', 'assets/img/vocnimuffin', 'Sastojci', 50);
+	(3, 'Vocni mafin', 3, 'Opis vocnog mafina', 'assets/img/vocnimuffin', 'Sastojci', 40);
 /*!40000 ALTER TABLE `article` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `cart` (
@@ -109,24 +112,44 @@ CREATE TABLE IF NOT EXISTS `category` (
   `category_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL DEFAULT '0',
   `image_path` varchar(128) NOT NULL DEFAULT '0',
+  `description` varchar(128) NOT NULL,
+  `measurement` enum('unit','gram') NOT NULL DEFAULT 'unit',
   PRIMARY KEY (`category_id`),
   UNIQUE KEY `uq_category_name` (`name`),
   UNIQUE KEY `uq_category_image_path` (`image_path`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 DELETE FROM `category`;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` (`category_id`, `name`, `image_path`) VALUES
-	(1, 'Torte', 'assets/img/cake1.jpg'),
-	(2, 'Rolnice', 'assets/img/roll1.jpg'),
-	(3, 'Mafini', 'assets/img/muffin1.jpg');
+INSERT INTO `category` (`category_id`, `name`, `image_path`, `description`, `measurement`) VALUES
+	(1, 'Torte', 'assets/img/cake1.jpg', '0', 'unit'),
+	(2, 'Rolnice', 'assets/img/roll1.jpg', '0', 'unit'),
+	(3, 'Mafini', 'assets/img/muffin1.jpg', '0', 'unit'),
+	(4, 'Bombonice', 'assets/img/bombonice.jpg', 'Ovo je kratak opis bombica.', 'gram');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
+
+CREATE TABLE IF NOT EXISTS `category_photo` (
+  `category_photo_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `category_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `image_path` varchar(128) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`category_photo_id`),
+  UNIQUE KEY `uq_category_photo_image_path` (`image_path`),
+  UNIQUE KEY `uq_category_photo_category_id` (`category_id`),
+  CONSTRAINT `fk_category_photo_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+DELETE FROM `category_photo`;
+/*!40000 ALTER TABLE `category_photo` DISABLE KEYS */;
+INSERT INTO `category_photo` (`category_photo_id`, `category_id`, `image_path`) VALUES
+	(2, 4, '2020620-1018864135-bombonice.jpg');
+/*!40000 ALTER TABLE `category_photo` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `order` (
   `order_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `cart_id` int(11) unsigned NOT NULL,
   `status` enum('rejected','accepted','shipped','pending') NOT NULL DEFAULT 'pending',
+  `buyer_email` varchar(128) NOT NULL,
   PRIMARY KEY (`order_id`),
   UNIQUE KEY `uq_order_cart_id` (`cart_id`),
   CONSTRAINT `fk_order_cart_id` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON UPDATE CASCADE
@@ -134,18 +157,18 @@ CREATE TABLE IF NOT EXISTS `order` (
 
 DELETE FROM `order`;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` (`order_id`, `created_at`, `cart_id`, `status`) VALUES
-	(1, '2020-05-19 12:32:52', 1, 'shipped'),
-	(2, '2020-06-18 14:44:09', 2, 'shipped'),
-	(3, '2020-05-26 13:38:09', 3, 'pending'),
-	(4, '2020-05-26 13:39:48', 4, 'pending'),
-	(5, '2020-05-26 13:40:05', 5, 'pending'),
-	(6, '2020-05-26 13:40:27', 6, 'pending'),
-	(7, '2020-05-26 13:42:12', 7, 'pending'),
-	(8, '2020-05-26 13:42:45', 8, 'pending'),
-	(9, '2020-05-26 13:44:38', 9, 'pending'),
-	(10, '2020-05-26 13:48:47', 10, 'pending'),
-	(11, '2020-05-26 13:50:57', 11, 'pending');
+INSERT INTO `order` (`order_id`, `created_at`, `cart_id`, `status`, `buyer_email`) VALUES
+	(1, '2020-05-19 12:32:52', 1, 'shipped', ''),
+	(2, '2020-06-18 14:44:09', 2, 'shipped', ''),
+	(3, '2020-05-26 13:38:09', 3, 'pending', ''),
+	(4, '2020-05-26 13:39:48', 4, 'pending', ''),
+	(5, '2020-05-26 13:40:05', 5, 'pending', ''),
+	(6, '2020-05-26 13:40:27', 6, 'pending', ''),
+	(7, '2020-05-26 13:42:12', 7, 'pending', ''),
+	(8, '2020-05-26 13:42:45', 8, 'pending', ''),
+	(9, '2020-05-26 13:44:38', 9, 'pending', ''),
+	(10, '2020-05-26 13:48:47', 10, 'pending', ''),
+	(11, '2020-05-26 13:50:57', 11, 'pending', '');
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `photo` (
@@ -154,17 +177,15 @@ CREATE TABLE IF NOT EXISTS `photo` (
   `image_path` varchar(128) NOT NULL DEFAULT '0',
   PRIMARY KEY (`photo_id`),
   UNIQUE KEY `uq_photo_image_path` (`image_path`),
-  KEY `fk_photo_article_id` (`article_id`),
+  UNIQUE KEY `uq_photo_article_id` (`article_id`),
   CONSTRAINT `fk_photo_article_id` FOREIGN KEY (`article_id`) REFERENCES `article` (`article_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 DELETE FROM `photo`;
 /*!40000 ALTER TABLE `photo` DISABLE KEYS */;
 INSERT INTO `photo` (`photo_id`, `article_id`, `image_path`) VALUES
-	(2, 2, '2020429-3551588253-chocolatemuffin.jpg'),
-	(3, 2, '202054-9841330923-chocolatecake.jpg'),
-	(4, 2, '202054-9152162667-chocolateroll.jpg'),
-	(5, 2, '202054-8775486366-chocolateroll2.jpg');
+	(3, 1, '202054-9841330923-chocolatecake.jpg'),
+	(5, 2, '2020620-7988885828-chocolateroll2.jpg');
 /*!40000 ALTER TABLE `photo` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

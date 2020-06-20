@@ -7,6 +7,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   ManyToMany,
+  OneToOne,
 } from "typeorm";
 import { Category } from "./category.entity";
 import { CartArticle } from "./cart-article.entity";
@@ -73,6 +74,6 @@ export class Article {
   @OneToMany(() => CartArticle, (cartArticle) => cartArticle.article)
   cartArticles: CartArticle[];
 
-  @OneToMany(() => Photo, (photo) => photo.article)
+  @OneToOne(() => Photo, (photo) => photo.article)
   photos: Photo[];
 }

@@ -1,4 +1,4 @@
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { AppController } from './controllers/app.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfiguration } from 'config/database.configuration';
@@ -26,6 +26,8 @@ import { MailConfigugarion } from 'config/mail.configuration';
 import { OrderMailerService } from './services/order/order.mailer.service';
 import { AdministratorOrderController } from './controllers/api/administrator.order.controller';
 import { AdministratorToken } from './entities/administrator-token.entity';
+import { CategoryPhoto } from './entities/category-photo.entity';
+import { CategoryPhotoService } from './services/category-photo/category-photo.service';
 
 @Module({
   imports: [
@@ -43,10 +45,11 @@ import { AdministratorToken } from './entities/administrator-token.entity';
                   Cart,
                   Order,
                   Photo,
-                  AdministratorToken 
+                  AdministratorToken,
+                  CategoryPhoto
                 ]
     }),
-    TypeOrmModule.forFeature([ Administrator, Category, Article, Photo, Order, Cart, CartArticle, AdministratorToken ]),
+    TypeOrmModule.forFeature([ Administrator, Category, Article, Photo, Order, Cart, CartArticle, AdministratorToken, CategoryPhoto ]),
     MailerModule.forRoot({
       transport: `smtps://${MailConfigugarion.username}:${MailConfigugarion.password}@${MailConfigugarion.hostname}`,
       defaults: {
@@ -67,7 +70,8 @@ import { AdministratorToken } from './entities/administrator-token.entity';
               PhotoService,
               CartService,
               OrderService,
-              OrderMailerService],
+              OrderMailerService,
+              CategoryPhotoService],
   exports: [
       AdministratorService
   ]
@@ -76,6 +80,9 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(AuthMiddleware)
             .exclude('auth/*')
-            .forRoutes('api/*');
+            .forRoutes({path: 'api/*', method: RequestMethod.POST},
+                       {path: 'api/*', method: RequestMethod.PATCH},
+                       {path: 'api/*', method: RequestMethod.DELETE},
+                       {path: 'api/*', method: RequestMethod.PUT});
   }
 }

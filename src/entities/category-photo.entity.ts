@@ -7,18 +7,18 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
 } from "typeorm";
-import { Article } from "./article.entity";
 import * as Validator from 'class-validator';
+import { Category } from "./category.entity";
 
 // @Index("uq_photo_image_path", ["imagePath"], { unique: true })
 // @Index("fk_photo_article_id", ["articleId"], {})
-@Entity("photo")
-export class Photo {
-  @PrimaryGeneratedColumn({ type: "int", name: "photo_id", unsigned: true })
+@Entity("category_photo")
+export class CategoryPhoto {
+  @PrimaryGeneratedColumn({ type: "int", name: "category_photo_id", unsigned: true })
   photoId: number;
 
-  @Column({type: "int", name: "article_id", unsigned: true})
-  articleId: number;
+  @Column({type: "int", name: "category_id", unsigned: true})
+  categoryId: number;
 
   @Column({
     type: "varchar",
@@ -31,10 +31,10 @@ export class Photo {
   @Validator.Length(2, 128)
   imagePath: string;
 
-  @OneToOne(() => Article, (article) => article.photos, {
+  @OneToOne(() => Category, (category) => category.categoryPhotos, {
     onDelete: "RESTRICT",
     onUpdate: "CASCADE",
   })
-  @JoinColumn([{ name: "article_id", referencedColumnName: "articleId" }])
-  article: Article;
+  @JoinColumn([{ name: "category_id", referencedColumnName: "categoryId" }])
+  category: Category;
 }
