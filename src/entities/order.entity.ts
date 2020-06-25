@@ -34,14 +34,14 @@ export class Order {
   @Validator.IsIn(["rejected", "accepted", "shipped", "pending"])
   status: "rejected" | "accepted" | "shipped" | "pending";
 
-  @Column({
-    type: "varchar",
-    length: 128
-  })
-  @Validator.IsNotEmpty()
-  @Validator.IsString()
-  @Validator.Length(2, 128)
-  buyerEmail: string;
+  // @Column({
+  //   type: "varchar",
+  //   length: 128
+  // })
+  // @Validator.IsNotEmpty()
+  // @Validator.IsString()
+  // @Validator.Length(2, 128)
+  // buyerEmail: string;
 
   @OneToOne(() => Cart, (cart) => cart.order, {
     onDelete: "RESTRICT",

@@ -15,8 +15,10 @@ export class ApiCartController {
         private orderService: OrderService
     ) { }
 
-    private async getCartByOrderId(orderId: number): Promise<Cart> {
-        let cart =  await this.cartService.getLastCartByOrderId(orderId);
+    cartId = 50;
+
+    private async getActiveCartByCartId(cartId: number): Promise<Cart>{
+        let cart =  await this.cartService.getLastActiveCartByCartId(cartId);
 
         if(!cart) {
             cart = await this.cartService.createNewCart();
@@ -25,32 +27,53 @@ export class ApiCartController {
         return await this.cartService.getById(cart.cartId);
     }
 
+    private async getCartByCartId(cartId: number): Promise<Cart> {
+        // let cart =  await this.cartService.getLastActiveCartByCartId(cartId);
+
+        // if(!cart) {
+        //     cart = await this.cartService.createNewCart();
+        // }
+
+        // return await this.cartService.getById(cart.cartId);
+        cartId = 51;
+        return await this.getActiveCartByCartId(cartId);
+        
+    }
+
     @Get()
-    async getCart(orderId: number): Promise<Cart> {
-        return await this.getCartByOrderId(orderId);
+    async getCart(cartId: number): Promise<Cart> {
+        return await this.getCartByCartId(cartId);
         
     }
 
     @Post('addToCart/')
-    async addToCart(@Body() data: AddArticleToCartDto, orderId: number): Promise<Cart | ApiResponse>{
-        const cart = await this.getCart(orderId);
+    async addToCart(@Body() data: AddArticleToCartDto, cartId: number): Promise<Cart | ApiResponse> {
+        // const cart = await this.getCart(cartId);
 
-        if(!cart) {
-            return new ApiResponse("error", -6001, "Could not add article to cart.");
-        }
+        // if(!cart) {
+        //     return new ApiResponse("error", -6001, "Could not add article to cart.");
+        // }
 
-        return await this.cartService.addArticleToCart(cart.cartId, data.articleId, data.quantity );
+        // return await this.cartService.addArticleToCart(cart.cartId, data.articleId, data.quantity );
+
+
+        
+        const cart = await this.getActiveCartByCartId(cartId);
+
+        cartId = 51;
+
+        return await this.cartService.addArticleToCart(cart.cartId, data.articleId, data.quantity);
     }
 
     @Patch()
-    async changeQuantity(@Body() data: EditArticleInCartDto, orderId: number){
-        const cart = await this.getCartByOrderId(orderId);
+    async changeQuantity(@Body() data: EditArticleInCartDto, cartId: number){
+        const cart = await this.getCartByCartId(cartId);
         return await this.cartService.changeQuantity(cart.cartId, data.articleId, data.quantity);
     }
 
     @Post('makeOrder')
-    async makeOrder(orderId: number): Promise<Order | ApiResponse> {
-        const cart = await this.getCartByOrderId(orderId);
+    async makeOrder(cartId: number): Promise<Order | ApiResponse> {
+        const cart = await this.getCartByCartId(cartId);
         return await this.orderService.add(cart.cartId);
     }
 }

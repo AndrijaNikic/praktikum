@@ -12,7 +12,7 @@ export class EditArticleDto {
 
     @Validator.IsNotEmpty()
     @Validator.IsString()
-    @Validator.Length(64, 1000)
+    @Validator.Length(10, 1000)
     description: string;
 
     @Validator.IsNotEmpty()
@@ -22,7 +22,7 @@ export class EditArticleDto {
 
     @Validator.IsNotEmpty()
     @Validator.IsString()
-    @Validator.Length(64, 1000)
+    @Validator.Length(10, 1000)
     ingredients: string;
 
     @Validator.IsNotEmpty()

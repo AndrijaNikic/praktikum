@@ -475,16 +475,6 @@
 					]
 				}
 			],
-			"auth": {
-				"type": "bearer",
-				"bearer": [
-					{
-						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU4OTg0MzkyNi4wMzQsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI0LjEiLCJpYXQiOjE1ODg2MzQzMjZ9.p5FhEoYWofrfQI8Wux_eXt9LqrTDW8bpoUcrRfts0I0",
-						"type": "string"
-					}
-				]
-			},
 			"event": [
 				{
 					"listen": "prerequest",
@@ -515,6 +505,16 @@
 				{
 					"name": "POST Create article",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTcwNDM2OS45ODMsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI2LjEiLCJpYXQiOjE1OTMwMjU5Njl9.KCRvURQ3pLoYUZVIVvhsB2I8LyL6S6SaEtrsVovdf9c",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -525,7 +525,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Vocna rolnica\",\r\n    \"categoryId\": \"2\",\r\n    \"description\": \"Opis vocne rolnice\",\r\n    \"imagePath\": \"assets/img/fruitroll\",\r\n    \"ingredients\": \"Sastojci\",\r\n    \"price\": \"35\"  \r\n}\r\n",
+							"raw": "{\r\n    \"name\": \"Vocna bombonica\",\r\n    \"categoryId\": 4,\r\n    \"description\": \"Ovo je opis vocnih bombonica\",\r\n    \"imagePath\": \"assets/img/fruitloop\",\r\n    \"ingredients\": \"Sastojci su navedeni ovde\",\r\n    \"price\": 5  \r\n}\r\n",
 							"options": {
 								"raw": {}
 							}
@@ -910,11 +910,14 @@
 				{
 					"name": "POST Filter articles",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"categoryId\": 3,\r\n    \"orderBy\": \"price\",\r\n    \"orderDirection\": \"DESC\"\r\n}",
+							"raw": "{\r\n    \"categoryId\": 3,\r\n    \"orderBy\": \"article.price\",\r\n    \"orderDirection\": \"DESC\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -935,19 +938,105 @@
 							]
 						}
 					},
+					"response": [
+						{
+							"name": "POST Filter articles - succesful",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryId\": 3,\r\n    \"orderBy\": \"article.price\",\r\n    \"orderDirection\": \"ASC\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/article/filter",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"filter"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "431"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1af-6zS5QYsZzC8uiGHmSFiE032hrpQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 Jun 2020 20:34:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"articleId\": 3,\n        \"name\": \"Vocni mafin\",\n        \"categoryId\": 3,\n        \"description\": \"Opis vocnog mafina\",\n        \"imagePath\": \"assets/img/vocnimuffin\",\n        \"ingredients\": \"Sastojci\",\n        \"price\": 40,\n        \"photos\": null\n    },\n    {\n        \"articleId\": 2,\n        \"name\": \"Cokoladni mafin\",\n        \"categoryId\": 3,\n        \"description\": \"Opis cokoladnog mafina\",\n        \"imagePath\": \"assets/img/chocmuffin\",\n        \"ingredients\": \"Sastojci\",\n        \"price\": 50,\n        \"photos\": {\n            \"photoId\": 5,\n            \"articleId\": 2,\n            \"imagePath\": \"2020620-7988885828-chocolateroll2.jpg\"\n        }\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "DELETE Article",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTcwNDM2OS45ODMsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI2LjEiLCJpYXQiOjE1OTMwMjU5Njl9.KCRvURQ3pLoYUZVIVvhsB2I8LyL6S6SaEtrsVovdf9c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/article/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								"6"
+							]
+						}
+					},
 					"response": []
 				}
 			],
-			"auth": {
-				"type": "bearer",
-				"bearer": [
-					{
-						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTM2MzY1NS41MzYsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI1LjAiLCJpYXQiOjE1OTI2ODUyNTV9.6rrs1ertWzyJBvWk-o3WsBRo3qWcRzW3Tdd9hMZXmX8",
-						"type": "string"
-					}
-				]
-			},
 			"event": [
 				{
 					"listen": "prerequest",
@@ -1282,6 +1371,28 @@
 					"response": []
 				}
 			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "52ccc410-898e-4e32-a617-45930068e050",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "40ab4808-91de-4ffd-9704-4bb715a3d3e0",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
 			"protocolProfileBehavior": {}
 		},
 		{
@@ -1290,6 +1401,16 @@
 				{
 					"name": "GET Current cart details",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5Mjk1MzA4OS43MjksImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI1LjAiLCJpYXQiOjE1OTI5NTI3ODl9.p29cI_R0-IMbOnPL2h7r2kk3jLRAG5jfEs1jS6LEyA8",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -1309,11 +1430,21 @@
 				{
 					"name": "POST Add article to cart",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5Mjk1MzA4OS43MjksImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI1LjAiLCJpYXQiOjE1OTI5NTI3ODl9.p29cI_R0-IMbOnPL2h7r2kk3jLRAG5jfEs1jS6LEyA8",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"articleId\": 2,\n\t\"quantity\": 2\n}",
+							"raw": "{\n\t\"articleId\": 1,\n\t\"quantity\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1342,7 +1473,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"articleId\": 2,\n\t\"quantity\": 0\n}",
+							"raw": "{\n\t\"articleId\": 1,\n\t\"quantity\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1459,6 +1590,16 @@
 				{
 					"name": "PATCH (edit) Order status",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5MzAxOTMzMS45NiwiaXAiOiI6OjEiLCJ1YSI6IlBvc3RtYW5SdW50aW1lLzcuMjYuMSIsImlhdCI6MTU5MzAxOTAzMX0.-VZjLPl__sTjJQVocnO5CkCC5kC0QC0VlSAjvTCgre8",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
@@ -1471,7 +1612,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/order/2",
+							"raw": "http://localhost:3000/api/order/12",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1480,11 +1621,33 @@
 							"path": [
 								"api",
 								"order",
-								"2"
+								"12"
 							]
 						}
 					},
 					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e092f8d2-1c0d-4a16-a9f5-29d75ebc6db7",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "69da2052-4e9b-4ab0-9390-9b6745e0a898",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -1657,11 +1820,21 @@
 				{
 					"name": "POST Add a single category",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5MzAyNTkxNywiaXAiOiI6OjEiLCJ1YSI6IlBvc3RtYW5SdW50aW1lLzcuMjYuMSIsImlhdCI6MTU5MzAyNTYxN30.nzansXyUdSdrccMOvis6IsmJde7LEgueZs7mqrskX_Y",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"name\": \"Bombonice\",\r\n    \"imagePath\": \"assets/candy/candy.jpg\",\r\n\t\"description\": \"Ovo je opis bombonica.\",\r\n\t\"measurement\": \"gram\"\r\n}",
+							"raw": "{\r\n\t\"name\": \"Kuglice\",\r\n    \"imagePath\": \"assets/candy/kuglice.jpg\",\r\n\t\"description\": \"Ovo je opis kuglica.\",\r\n\t\"measurement\": \"gram\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1920,18 +2093,39 @@
 							"body": "{\n    \"categoryId\": \"4\",\n    \"imagePath\": \"2020620-7239903243-bombonice.jpg\",\n    \"photoId\": 1\n}"
 						}
 					]
+				},
+				{
+					"name": "DELETE Category",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5MzAyNTkxNywiaXAiOiI6OjEiLCJ1YSI6IlBvc3RtYW5SdW50aW1lLzcuMjYuMSIsImlhdCI6MTU5MzAyNTYxN30.nzansXyUdSdrccMOvis6IsmJde7LEgueZs7mqrskX_Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/category/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category",
+								"6"
+							]
+						}
+					},
+					"response": []
 				}
 			],
-			"auth": {
-				"type": "bearer",
-				"bearer": [
-					{
-						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTM2MzY1NS41MzYsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI1LjAiLCJpYXQiOjE1OTI2ODUyNTV9.6rrs1ertWzyJBvWk-o3WsBRo3qWcRzW3Tdd9hMZXmX8",
-						"type": "string"
-					}
-				]
-			},
 			"event": [
 				{
 					"listen": "prerequest",
@@ -1962,7 +2156,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTI0NDEwMS4xMDMsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI1LjAiLCJpYXQiOjE1OTI1NjU3MDF9.d_h94-FSwPuvPKkCpNn9V16tkPUJCC0iNtP7juXo3aM",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTcwNDM2OS45ODMsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI2LjEiLCJpYXQiOjE1OTMwMjU5Njl9.KCRvURQ3pLoYUZVIVvhsB2I8LyL6S6SaEtrsVovdf9c",
 				"type": "string"
 			}
 		]

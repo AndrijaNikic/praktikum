@@ -33,7 +33,7 @@ import { ArticleFilterDto } from "dtos/article/article.filter.dto";
         exclude: [ 
             'updateOneBase',
             'replaceOneBase',
-            'deleteOneBase'
+            // 'deleteOneBase'
         ]
     }
 
@@ -200,7 +200,7 @@ export class ArticleController {
     }
 
     @Post('filter')
-    async filter(@Body() data: ArticleFilterDto): Promise<Article[]> {
+    async filter(@Body() data: ArticleFilterDto): Promise<Article[] | ApiResponse> {
         return await this.service.filter(data);
     }
 

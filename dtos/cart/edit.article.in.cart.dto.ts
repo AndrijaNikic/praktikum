@@ -9,6 +9,6 @@ export class EditArticleInCartDto {
     allowNaN: false,
     maxDecimalPlaces: 0
   })
-    @Validator.IsPositive()
+    // @Validator.IsPositive()
     quantity: number;
 }

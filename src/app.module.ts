@@ -79,7 +79,7 @@ import { CategoryPhotoService } from './services/category-photo/category-photo.s
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(AuthMiddleware)
-            .exclude('auth/*')
+            .exclude('auth/*', 'api/article/filter')
             .forRoutes({path: 'api/*', method: RequestMethod.POST},
                        {path: 'api/*', method: RequestMethod.PATCH},
                        {path: 'api/*', method: RequestMethod.DELETE},

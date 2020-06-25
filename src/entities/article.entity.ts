@@ -34,7 +34,7 @@ export class Article {
   @Column({type: "text"})
   @Validator.IsNotEmpty()
   @Validator.IsString()
-  @Validator.Length(64, 1000)
+  @Validator.Length(10, 1000)
   description: string;
 
   @Column({
@@ -51,7 +51,7 @@ export class Article {
   @Column({type:"varchar", length: 128})
   @Validator.IsNotEmpty()
   @Validator.IsString()
-  @Validator.Length(64, 1000)
+  @Validator.Length(10, 1000)
   ingredients: string;
 
   @Column({type: "int"})

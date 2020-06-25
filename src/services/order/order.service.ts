@@ -19,7 +19,7 @@ export class OrderService {
         });
 
         if(order) {
-            return new ApiResponse("error", -7001, "An order for this cart has already been made");
+            return new ApiResponse("error", -7001, "An order for this cart has already been made.");
         }
 
         const cart = await this.cart.findOne(cartId, {
@@ -52,7 +52,6 @@ export class OrderService {
                 "cart.cartArticles.article",
                 "cart.cartArticles.article.category",
                 // "cart.cartArticles.article.price",
-                // "cart.cartArticles.article.articlePrices"
             ]
         });
     }

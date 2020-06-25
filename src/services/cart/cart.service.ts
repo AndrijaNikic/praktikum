@@ -9,17 +9,17 @@ import { Order } from "src/entities/order.entity";
 
 @Injectable()
 export class CartService {
-    constructor(@InjectRepository(Cart) private cart: Repository<Cart>,
-                @InjectRepository(CartArticle) private cartArticle: Repository<CartArticle>,
-                @InjectRepository(Article) private article: Repository<Article>,
-                // @InjectRepository(Order) private order: Repository<Order>
+    constructor(@InjectRepository(Cart) private readonly cart: Repository<Cart>,
+                @InjectRepository(CartArticle) private readonly cartArticle: Repository<CartArticle>,
+                @InjectRepository(Article) private readonly article: Repository<Article>,
+                @InjectRepository(Order) private readonly order: Repository<Order>
                 ) { }
 
 
-    async getLastCartByOrderId(orderId: number): Promise<Cart | null> {
+    async getLastActiveCartByCartId(cartId: number): Promise<Cart | null> {
         const carts = await this.cart.find({
             where: {
-                orderId: orderId
+                cartId: cartId
             },
             order: {
                 createdAt: "DESC",
@@ -42,7 +42,7 @@ export class CartService {
     }
     
     async createNewCart(): Promise<Cart> {
-        const newCart = new Cart();
+        const newCart: Cart = new Cart();
         return await this.cart.save(newCart);
     }
 
@@ -62,7 +62,7 @@ export class CartService {
             record.cartId = cartId;
             record.articleId = articleId;
             record.quantity = quantity;
-            record = await this.cartArticle.save(record);
+            // record = await this.cartArticle.save(record);
         } else {
             record.quantity += quantity;
         }
@@ -77,15 +77,23 @@ export class CartService {
     }
 
     async getById(cartId: number): Promise<Cart>{
-        return await this.cart.findOne(cartId, {
+        // return await this.cart.findOne(cartId, {
+        //     relations: [
+        //         "cartArticles",
+        //         "cartArticles.article",
+        //         "cartArticles.article.category",
+        //         // "cartArticles.article.articlePrices",
+        //         // "cartArticles.article.photos"
+        //     ]
+        // });
+
+        return this.cart.findOne(cartId, {
             relations: [
                 "cartArticles",
                 "cartArticles.article",
-                "cartArticles.article.category",
-                // "cartArticles.article.articlePrices",
-                // "cartArticles.article.photos"
+                "cartArticles.article.category"
             ]
-        });
+        })
     }
 
     async changeQuantity(cartId: number, articleId: number, newQuantity: number): Promise<Cart>{
