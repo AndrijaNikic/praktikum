@@ -48,16 +48,6 @@ export class ApiCartController {
 
     @Post('addToCart/')
     async addToCart(@Body() data: AddArticleToCartDto, cartId: number): Promise<Cart | ApiResponse> {
-        // const cart = await this.getCart(cartId);
-
-        // if(!cart) {
-        //     return new ApiResponse("error", -6001, "Could not add article to cart.");
-        // }
-
-        // return await this.cartService.addArticleToCart(cart.cartId, data.articleId, data.quantity );
-
-
-        
         const cart = await this.getActiveCartByCartId(cartId);
 
         cartId = 51;

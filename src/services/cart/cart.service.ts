@@ -62,7 +62,6 @@ export class CartService {
             record.cartId = cartId;
             record.articleId = articleId;
             record.quantity = quantity;
-            // record = await this.cartArticle.save(record);
         } else {
             record.quantity += quantity;
         }
@@ -77,15 +76,6 @@ export class CartService {
     }
 
     async getById(cartId: number): Promise<Cart>{
-        // return await this.cart.findOne(cartId, {
-        //     relations: [
-        //         "cartArticles",
-        //         "cartArticles.article",
-        //         "cartArticles.article.category",
-        //         // "cartArticles.article.articlePrices",
-        //         // "cartArticles.article.photos"
-        //     ]
-        // });
 
         return this.cart.findOne(cartId, {
             relations: [
