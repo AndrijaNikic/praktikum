@@ -1,0 +1,2175 @@
+{
+	"info": {
+		"_postman_id": "b03ba631-3326-43b0-b922-640684265a45",
+		"name": "Veb servis aplikacije",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Administrator",
+			"item": [
+				{
+					"name": "GET All administrators",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all administrators",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "155"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9b-9koVArlkaGfxW2OBytxs3JMogWk\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Apr 2020 23:28:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"administratorId\": 1,\n        \"username\": \"Nikic\",\n        \"passwordHash\": \"123123123123123123\"\n    },\n    {\n        \"administratorId\": 2,\n        \"username\": \"Marko\",\n        \"passwordHash\": \"456456456456456456\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GET One administrator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get one administrator",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "76"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4c-MEYBffyRBdQ30O0ajd8BffKlu2s\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Apr 2020 23:31:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 1,\n    \"username\": \"Nikic\",\n    \"passwordHash\": \"123123123123123123\"\n}"
+						}
+					]
+				},
+				{
+					"name": "POST Add a new administrator",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"novi\",\n\t\"password\": \"novaa\"\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add a new administrator - error - username taken",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"novi\",\n\t\"password\": \"novaa\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-t4k/9UI9MQaVcBQ68YkMUdFYBok\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Apr 2020 00:11:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -1001,\n    \"message\": null\n}"
+						},
+						{
+							"name": "Add a new administrator - success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"novi\",\n\t\"password\": \"nova\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "185"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b9-QVaLhn9OQfeg/kwoO8qAJfvFfVw\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Apr 2020 23:53:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"username\": \"novi\",\n    \"passwordHash\": \"260FDFA9DD036152068CCEA792FEB6A8CF1982F5B0573B9282A5C82C91F2D9BE355A0E2160E149E96EC773122A0385E6662E07F632A1B7F7BE1220F8BF27A60E\",\n    \"administratorId\": 3\n}"
+						}
+					]
+				},
+				{
+					"name": "PATCH (edit) an administrator",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"password\": \"newpassword\"\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/administrator/22",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"administrator",
+								"22"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit an administrator - error - administrator does not exist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"password\": \"newpassword\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/22",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"22"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-aUTW/cvwFQlAs9+DoHDtUDh+ECY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Apr 2020 11:30:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -2001,\n    \"message\": null\n}"
+						},
+						{
+							"name": "Edit an administrator - success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"password\": \"newpassword\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/administrator/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"administrator",
+										"2"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "186"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ba-qFjkkAOL4349t7vnOy3PvLPjlUw\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 16 Apr 2020 11:25:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 2,\n    \"username\": \"Marko\",\n    \"passwordHash\": \"7DD29A9C9643FD524E1B4360964B89CE59914E68D1FD1AB04DD61FBAAABC58E579DCFFB5B7454AB01E586C8AE98E538B5D6E0FF3AE7DD442DE7333486DC9DF1A\"\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTc2NDUwNi4wOTQsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI2LjEiLCJpYXQiOjE1OTMwODYxMDZ9.MnyBfC1cJwdI6Iixt8dPahjND3Ne4xodNaFRnxB4C3w",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "13fdc5ae-e8c4-4a3d-ac05-9a226c74b262",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "76283dfe-d421-448b-8163-7822f473e2b8",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Article",
+			"item": [
+				{
+					"name": "POST Create article",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Vocna bombonica\",\r\n    \"categoryId\": 4,\r\n    \"description\": \"Ovo je opis vocnih bombonica\",\r\n    \"imagePath\": \"assets/img/fruitloop\",\r\n    \"ingredients\": \"Sastojci su navedeni ovde\",\r\n    \"price\": 5  \r\n}\r\n",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/article/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST createFull - successful",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Vocni mafin\",\r\n    \"categoryId\": \"3\",\r\n    \"description\": \"Opis vocnog mafina\",\r\n    \"imagePath\": \"assets/img/vocnimuffin\",\r\n    \"ingredients\": \"Sastojci\",\r\n    \"price\": \"50\"  \r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/article/createFull",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"createFull"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "240"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"f0-A3U3Y5DbCbxSAAZE25L4VZvLcsg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 22 Apr 2020 15:52:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"articleId\": 3,\n    \"name\": \"Vocni mafin\",\n    \"categoryId\": 3,\n    \"description\": \"Opis vocnog mafina\",\n    \"imagePath\": \"assets/img/vocnimuffin\",\n    \"ingredients\": \"Sastojci\",\n    \"price\": 50,\n    \"category\": {\n        \"categoryId\": 3,\n        \"name\": \"Mafini\",\n        \"imagePath\": \"assets/img/muffin1.jpg\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "POST Edit article by id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"name\": \"ACME SSD 1TB\",\r\n \"categoryId\": 3,\r\n \"excerpt\": \"Novi kratak opis artikla\",\r\n \"description\": \"Novi tekst detaljnog opisa artikla...\",\r\n \"status\": \"available\",\r\n \"isPromoted\": \"true\",\r\n \"price\": 89.2,\r\n \"features\": [\r\n { \"featureId\": 2, \"value\": \"SSD\" },\r\n { \"featureId\": 3, \"value\": \"SATA 3.0\" }\r\n ]\r\n}\r\n",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/article/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Upload article photo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/Nikic/Desktop/Projekti/ChocolateRoll2.jpg"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/article/2/uploadPhoto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								"2",
+								"uploadPhoto"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Upload article photo - bad file extension",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/Nikic/Desktop/PraktikumDokumentacija.docx"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/article/2/uploadPhoto",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"2",
+										"uploadPhoto"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"45-od7dQdTv/ahWn/XXxx+wEtjzemE\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 May 2020 14:55:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -4002,\n    \"message\": \"Bad file extension.\"\n}"
+						},
+						{
+							"name": "Upload article photo - succesfull",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/Nikic/Desktop/ChocolateMuffin.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/article/2/uploadPhoto",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"2",
+										"uploadPhoto"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "82"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"52-o9sGJL6TFvZvcdOJxOoD4xrsAuI\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 29 Apr 2020 18:34:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"articleId\": \"2\",\n    \"imagePath\": \"2020429-3551588253-chocolatemuffin.jpg\",\n    \"photoId\": 2\n}"
+						}
+					]
+				},
+				{
+					"name": "GET Single article",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/article/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Many articles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/article/?filter=article.price||$lt||600&sort=article.price,ASC",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								""
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "article.price||$lt||600"
+								},
+								{
+									"key": "sort",
+									"value": "article.price,ASC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH (edit) A single article",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"\",\n\t\"categoryId\": \"\",\n\t\"description\": \"\",\n\t\"imagePath\": \"\",\n\t\"ingredients\": \"\",\n\t\"price\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/article/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Article photo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/article/1/deletePhoto/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								"1",
+								"deletePhoto",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Filter articles",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryId\": 3,\r\n    \"orderBy\": \"article.price\",\r\n    \"orderDirection\": \"DESC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/article/filter",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								"filter"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST Filter articles - succesful",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryId\": 3,\r\n    \"orderBy\": \"article.price\",\r\n    \"orderDirection\": \"ASC\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/article/filter",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"article",
+										"filter"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "431"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1af-6zS5QYsZzC8uiGHmSFiE032hrpQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 23 Jun 2020 20:34:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"articleId\": 3,\n        \"name\": \"Vocni mafin\",\n        \"categoryId\": 3,\n        \"description\": \"Opis vocnog mafina\",\n        \"imagePath\": \"assets/img/vocnimuffin\",\n        \"ingredients\": \"Sastojci\",\n        \"price\": 40,\n        \"photos\": null\n    },\n    {\n        \"articleId\": 2,\n        \"name\": \"Cokoladni mafin\",\n        \"categoryId\": 3,\n        \"description\": \"Opis cokoladnog mafina\",\n        \"imagePath\": \"assets/img/chocmuffin\",\n        \"ingredients\": \"Sastojci\",\n        \"price\": 50,\n        \"photos\": {\n            \"photoId\": 5,\n            \"articleId\": 2,\n            \"imagePath\": \"2020620-7988885828-chocolateroll2.jpg\"\n        }\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "DELETE Article",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/article/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"article",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTc2NDUwNi4wOTQsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI2LjEiLCJpYXQiOjE1OTMwODYxMDZ9.MnyBfC1cJwdI6Iixt8dPahjND3Ne4xodNaFRnxB4C3w",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c5e716f4-2140-4cc6-b402-07889bd6c1f7",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d1f23937-92bd-4656-9a06-1aadd8b409e8",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "POST Administrator login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"novi\",\n\t\"password\": \"nova\"\n}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/administrator/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"administrator",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login - when the administrator exists and the password is correct",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"novi\",\n\t\"password\": \"nova\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "287"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"11f-zugxs3r/K5sFArHAw3AugqRJ56g\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 25 Apr 2020 18:30:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 3,\n    \"username\": \"novi\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4dCI6MTU4OTA0OTAxMy4xNjYsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI0LjEiLCJpYXQiOjE1ODc4Mzk0MTN9.cZB5Jx_jQRTGUGpsXmIhF0GQ86YcPTRnC6ZY7oBXBiA\"\n}"
+						},
+						{
+							"name": "Login - when the username is not correct (admin does not exist)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"novii\",\n\t\"password\": \"nova\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-jVzHjGg0W81AgoBNOOnaoLkouLY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 25 Apr 2020 18:33:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -3001,\n    \"message\": null\n}"
+						},
+						{
+							"name": "Administrator login - with refresh token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"novi\",\n\t\"password\": \"nova\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/administrator/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"administrator",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "592"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"250-1+cX7dowJmJiW0P55ULV3JiThyI\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Jun 2020 15:26:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 3,\n    \"username\": \"novi\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5MjQ5NDI5OC42OSwiaXAiOiI6OjEiLCJ1YSI6IlBvc3RtYW5SdW50aW1lLzcuMjUuMCIsImlhdCI6MTU5MjQ5Mzk5OH0.ZSQadK-_ire7mICahkaRb3g6_spgv9F0VF38ETDqSK0\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTE3MjM5OC42OTIsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI1LjAiLCJpYXQiOjE1OTI0OTM5OTh9.JHOvSu2kAuc4wsYu5ZPFSdR_EBmDpvbim5XJQN3Ny_U\",\n    \"refreshTokenExpiresAt\": \"2020-07-19T15:26:38.692Z\"\n}"
+						},
+						{
+							"name": "Login - when the password is not correct",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"novi\",\n\t\"password\": \"novaa\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-yGnd1fUn+KRemOJUJKfIJoExxS4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 25 Apr 2020 18:34:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"error\",\n    \"statusCode\": -3002,\n    \"message\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "POST Refresh administrator token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTIwMzIxMS42OTksImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI1LjAiLCJpYXQiOjE1OTI1MjQ4MTF9.qUmAlkvT0krk7tQ0zn_jC7YUhe3SxPfE64iYfbGWCyc\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/administrator/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"administrator",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "52ccc410-898e-4e32-a617-45930068e050",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "40ab4808-91de-4ffd-9704-4bb715a3d3e0",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Cart and Order",
+			"item": [
+				{
+					"name": "GET Current cart details",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/cart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Add article to cart",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"articleId\": 3,\n\t\"quantity\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/cart/addToCart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cart",
+								"addToCart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH (edit) Article quantity",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"articleId\": 1,\n\t\"quantity\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/cart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Make an order for the current cart",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/cart/makeOrder",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cart",
+								"makeOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Order information",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/order/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"order",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get order information",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/order/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"order",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "475"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1db-0MvcklCrfriyJ2VcrOojfd7h8N0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 18 Jun 2020 12:43:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"orderId\": 1,\n    \"createdAt\": \"2020-05-19T10:32:52.000Z\",\n    \"cartId\": 1,\n    \"status\": \"shipped\",\n    \"cart\": {\n        \"cartId\": 1,\n        \"createdAt\": \"2020-05-19T10:20:32.000Z\",\n        \"note\": null,\n        \"cartArticles\": [\n            {\n                \"cartArticleId\": 1,\n                \"cartId\": 1,\n                \"articleId\": 1,\n                \"quantity\": 5,\n                \"article\": {\n                    \"articleId\": 1,\n                    \"name\": \"Oreo torta\",\n                    \"categoryId\": 1,\n                    \"description\": \"Opis oreo torte\",\n                    \"imagePath\": \"assets/img/oreocake1.jpg\",\n                    \"ingredients\": \"Sastojci\",\n                    \"price\": 500,\n                    \"category\": {\n                        \"categoryId\": 1,\n                        \"name\": \"Torte\",\n                        \"imagePath\": \"assets/img/cake1.jpg\"\n                    }\n                }\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "PATCH (edit) Order status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"newStatus\": \"shipped\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/order/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"order",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTc2NDUwNi4wOTQsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI2LjEiLCJpYXQiOjE1OTMwODYxMDZ9.MnyBfC1cJwdI6Iixt8dPahjND3Ne4xodNaFRnxB4C3w",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e092f8d2-1c0d-4a16-a9f5-29d75ebc6db7",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "69da2052-4e9b-4ab0-9390-9b6745e0a898",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "GET Categories",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET Category - succesfull",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/category",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "324"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"144-+uxfnGVUcgypqTvFuS/sEsEOTj8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Jun 2020 19:55:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"categoryId\": 1,\n        \"name\": \"Torte\",\n        \"imagePath\": \"assets/img/cake1.jpg\",\n        \"description\": \"0\",\n        \"measurement\": \"unit\"\n    },\n    {\n        \"categoryId\": 2,\n        \"name\": \"Rolnice\",\n        \"imagePath\": \"assets/img/roll1.jpg\",\n        \"description\": \"0\",\n        \"measurement\": \"unit\"\n    },\n    {\n        \"categoryId\": 3,\n        \"name\": \"Mafini\",\n        \"imagePath\": \"assets/img/muffin1.jpg\",\n        \"description\": \"0\",\n        \"measurement\": \"unit\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "PATCH (edit) A single category",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"Bombonice\",\r\n    \"imagePath\": \"assets/img/bombonice.jpg\",\r\n\t\"description\": \"Ovo je kratak opis bombica.\",\r\n\t\"measurement\": \"gram\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/category/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category",
+								"4"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PATCH (edit) A single category - succesfull",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"name\": \"Bombice\",\r\n    \"imagePath\": \"assets/img/bombonice.jpg\",\r\n\t\"description\": \"Ovo je kratak opis bombica.\",\r\n\t\"measurement\": \"gram\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/category/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"category",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "159"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9f-eK4Fvt1wK2picgtnOnjul4Xnn08\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 20 Jun 2020 20:28:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categoryId\": 4,\n    \"name\": \"Bombice\",\n    \"imagePath\": \"assets/img/bombonice.jpg\",\n    \"description\": \"Ovo je kratak opis bombica.\",\n    \"measurement\": \"gram\",\n    \"categoryPhotos\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "POST Add a single category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"Testkategorija\",\r\n    \"imagePath\": \"assets/candy/kuglice.jpg\",\r\n\t\"description\": \"Ovo je opis kuglica.\",\r\n\t\"measurement\": \"gram\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST Add a single category - succesfull",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"name\": \"Bombonice\",\r\n    \"imagePath\": \"assets/candy/candy.jpg\",\r\n\t\"description\": \"Ovo je opis bombonica.\",\r\n\t\"measurement\": \"gram\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/category",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"category"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "154"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9a-MZbumN+J1nsHiDQIJJTwsnIdjI8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 20 Jun 2020 20:07:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categoryId\": 4,\n    \"name\": \"Bombonice\",\n    \"imagePath\": \"assets/candy/candy.jpg\",\n    \"description\": \"Ovo je opis bombonica.\",\n    \"measurement\": \"gram\",\n    \"categoryPhotos\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE Category photo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/category/4/deletePhoto/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category",
+								"4",
+								"deletePhoto",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE Category photo - succesful",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/category/4/deletePhoto/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"category",
+										"4",
+										"deletePhoto",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "70"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"46-oxQJYHG/p6unNf/bscbt2z/esDU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 20 Jun 2020 20:50:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"ok\",\n    \"statusCode\": 0,\n    \"message\": \"One photo has been deleted.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "POST Upload category photo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/Nikic/Desktop/Projekti/Bombonice.jpg"
+								}
+							],
+							"options": {
+								"formdata": {}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/category/4/uploadPhoto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category",
+								"4",
+								"uploadPhoto"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST Upload category photo - succesful",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/Nikic/Desktop/Projekti/Bombonice.jpg"
+										}
+									],
+									"options": {
+										"formdata": {}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/category/4/uploadPhoto",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"category",
+										"4",
+										"uploadPhoto"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "77"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4d-54AFQm+SqNHTT8joTLhRgzJI2Hk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 20 Jun 2020 20:49:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categoryId\": \"4\",\n    \"imagePath\": \"2020620-7239903243-bombonice.jpg\",\n    \"photoId\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE Category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/category/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"category",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTc2NDUwNi4wOTQsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI2LjEiLCJpYXQiOjE1OTMwODYxMDZ9.MnyBfC1cJwdI6Iixt8dPahjND3Ne4xodNaFRnxB4C3w",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8e9710e0-2abe-45b6-9d82-3f1a2c480eca",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "27b5e6da-d1e2-4c69-a4a4-4706db3aa5da",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbmlzdHJhdG9ySWQiOjMsInVzZXJuYW1lIjoibm92aSIsImV4cCI6MTU5NTc2NDUwNi4wOTQsImlwIjoiOjoxIiwidWEiOiJQb3N0bWFuUnVudGltZS83LjI2LjEiLCJpYXQiOjE1OTMwODYxMDZ9.MnyBfC1cJwdI6Iixt8dPahjND3Ne4xodNaFRnxB4C3w",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c5e1a632-5048-4358-b0c1-0b4d74ce2496",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e4be7ad5-dd4b-47c3-b08d-c25707983360",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
